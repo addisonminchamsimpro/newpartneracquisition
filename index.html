@@ -938,6 +938,23 @@ body {
   margin-top: 4px;
 }
 
+.sp-step.sp-decision {
+  background: #fffcf3;
+  border-style: dashed;
+  border-color: #f59e0b;
+}
+.sp-step.sp-decision:hover, .sp-step.sp-decision.sp-active {
+  background: #fffbeb;
+}
+.sp-decision-tag {
+  display: inline-block;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: #92400e; background: #fef3c7;
+  padding: 2px 7px; border-radius: 100px;
+  margin-top: 4px;
+}
+
 .sp-col-arrow {
   text-align: center;
   color: var(--muted);
@@ -1580,6 +1597,14 @@ const sourcePaths = [
         detail: 'Addison reviews the queue on his regular check-in and claims the lead, moving it into his active pipeline ready for outreach.',
         tools: ['Salesforce'],
       },
+      {
+        num: 4, owner: 'addison', decision: true,
+        label: 'Quick SF review — qualify or disqualify?',
+        detail: 'Before sending any outreach, Addison does a quick review of the lead in Salesforce. Obvious mismatches (wrong region, irrelevant business type, duplicate, or clearly not a partner fit) are disqualified and closed in SF at this point — no email is ever sent.',
+        note: 'Only leads that pass this check proceed to Initial Outreach.',
+        tools: ['Salesforce'],
+        outcomes: { yes: 'Proceed to Initial Outreach Email', no: 'Lead disqualified & closed in Salesforce' },
+      },
     ],
   },
   {
@@ -1605,6 +1630,14 @@ const sourcePaths = [
         detail: 'The BDR/AE reassigns the Salesforce lead record to Addison. They also reach out separately — via Salesforce Chatter, a Slack message, or a warm intro email — to flag the handoff.',
         tools: ['Salesforce (Chatter)', 'Slack', 'Email'],
       },
+      {
+        num: 4, owner: 'addison', decision: true,
+        label: 'Quick SF review — qualify or disqualify?',
+        detail: 'Addison reviews the handed-off lead before reaching out. Even though a BDR/AE identified potential, he may disqualify if the business is not a match for the partner program — for example, if the prospect is better served as a direct customer.',
+        note: 'Only leads that pass this check proceed to Initial Outreach.',
+        tools: ['Salesforce'],
+        outcomes: { yes: 'Proceed to Initial Outreach Email', no: 'Lead disqualified & closed in Salesforce' },
+      },
     ],
   },
   {
@@ -1629,6 +1662,14 @@ const sourcePaths = [
         label: 'Leads appear in My Leads view',
         detail: 'Uploaded event leads appear in Addison\'s My Leads view in Salesforce, sitting in his queue and ready for outreach.',
         tools: ['Salesforce (My Leads)'],
+      },
+      {
+        num: 4, owner: 'addison', decision: true,
+        label: 'Quick SF review — qualify or disqualify?',
+        detail: 'Addison reviews the event leads in his queue. Contacts that are clearly not a partner fit (e.g., a direct customer prospect, the wrong industry, or a duplicate) are disqualified and closed in SF without any outreach being sent.',
+        note: 'Only leads that pass this check proceed to Initial Outreach.',
+        tools: ['Salesforce'],
+        outcomes: { yes: 'Proceed to Initial Outreach Email', no: 'Lead disqualified & closed in Salesforce' },
       },
     ],
   },
@@ -1709,12 +1750,13 @@ function selectSpStep(sourceId, stepIdx) {
   const detailHtml = `
     <div class="sdp-header">
       <div class="sdp-title">
-        <div class="sdp-num" style="background:${source.color}">${step.num}</div>
+        <div class="sdp-num" style="background:${step.decision ? '#f59e0b' : source.color}">${step.num}</div>
         <div class="sdp-info">
           <div class="sdp-label">${step.label}</div>
           <div class="sdp-badges">
             <span class="owner-badge" style="color:${o.color};background:rgba(${parseInt(o.color.slice(1,3),16)},${parseInt(o.color.slice(3,5),16)},${parseInt(o.color.slice(5,7),16)},0.1)">${o.label}</span>
             <span class="owner-badge" style="color:${source.color};background:${source.bg}">${source.name}</span>
+            ${step.decision ? '<span class="type-badge">Decision Point</span>' : ''}
             ${step.informal ? '<span class="type-badge">Informal tracking</span>' : ''}
           </div>
         </div>
@@ -1727,6 +1769,12 @@ function selectSpStep(sourceId, stepIdx) {
       ${step.tools && step.tools.length ? `
         <div class="detail-sub-label">Tools &amp; Systems</div>
         <div class="tools-row">${step.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
+      ${step.outcomes ? `
+        <div class="detail-sub-label">Outcomes</div>
+        <div class="outcomes-row">
+          <div class="outcome-item yes"><div class="outcome-icon">✅</div><div class="outcome-text"><strong>Yes</strong> ${step.outcomes.yes}</div></div>
+          <div class="outcome-item no"><div class="outcome-icon">❌</div><div class="outcome-text"><strong>No</strong> ${step.outcomes.no}</div></div>
+        </div>` : ''}
     </div>
   `;
 
@@ -1761,14 +1809,17 @@ function renderSourcePaths() {
     source.steps.forEach((step, idx) => {
       const o = owners[step.owner];
       const key = source.id + '-' + idx;
+      const decClass = step.decision ? ' sp-decision' : '';
+      const numBg = step.decision ? '#f59e0b' : source.color;
       gridHtml += `
-        <div class="sp-step" id="sp-${key}" onclick="selectSpStep('${source.id}', ${idx})">
-          <div class="sp-step-num" style="background:${source.color}">${step.num}</div>
+        <div class="sp-step${decClass}" id="sp-${key}" onclick="selectSpStep('${source.id}', ${idx})">
+          <div class="sp-step-num" style="background:${numBg}">${step.num}</div>
           <div class="sp-step-label">${step.label}</div>
           <div class="sp-step-owner">
             <div class="sp-odot" style="background:${o.color}"></div>
             <div class="sp-oname">${o.label}</div>
           </div>
+          ${step.decision ? '<div class="sp-decision-tag">Decision</div>' : ''}
           ${step.informal ? '<div class="sp-informal-tag">Informal</div>' : ''}
         </div>`;
     });
@@ -1784,7 +1835,7 @@ function renderSourcePaths() {
       <div class="sp-converge-box">
         <div class="sp-converge-icon">📧</div>
         <div class="sp-converge-label">Initial Outreach Email</div>
-        <div class="sp-converge-sub">All sources enter the standard workflow here ↓</div>
+        <div class="sp-converge-sub">Qualified leads from all sources enter the standard workflow here ↓</div>
       </div>
     </div>`;
 
