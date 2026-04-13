@@ -867,6 +867,155 @@ body {
 .sdp-close:hover { background: var(--bg-alt); color: var(--navy); border-color: var(--muted); }
 .sdp-body { padding: 20px; }
 
+/* ── SOURCE PATHS DIAGRAM ── */
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.sp-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+.sp-header {
+  border-radius: 12px;
+  padding: 14px 12px 12px;
+  text-align: center;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+}
+
+.sp-header-icon { font-size: 20px; margin-bottom: 5px; }
+.sp-header-name { font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.25; margin-bottom: 3px; }
+.sp-header-pct  { font-size: 11px; font-weight: 500; opacity: 0.7; }
+
+.sp-step {
+  background: var(--white);
+  border: 1px solid rgba(226,232,240,0.8);
+  border-radius: 10px;
+  padding: 10px 11px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+.sp-step:hover { box-shadow: var(--shadow-md); border-color: #cbd5e1; transform: translateY(-2px); }
+.sp-step.sp-active { box-shadow: var(--shadow-md); border-color: transparent; }
+
+.sp-step-num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  font-size: 10px; font-weight: 700;
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 5px;
+}
+
+.sp-step-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--navy); line-height: 1.3;
+  margin-bottom: 5px;
+}
+
+.sp-step-owner {
+  display: flex; align-items: center; gap: 4px;
+}
+.sp-odot  { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.sp-oname { font-size: 10px; color: var(--muted); font-weight: 500; }
+
+.sp-informal-tag {
+  display: inline-block;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: #92400e; background: #fef3c7;
+  padding: 2px 7px; border-radius: 100px;
+  margin-top: 4px;
+}
+
+.sp-col-arrow {
+  text-align: center;
+  color: var(--muted);
+  font-size: 18px;
+  padding: 4px 0 2px;
+  line-height: 1;
+}
+
+/* Convergence */
+.sp-converge-wrapper {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.sp-converge-top-bar {
+  width: 84%;
+  height: 22px;
+  border-left: 2px dashed #cbd5e1;
+  border-right: 2px dashed #cbd5e1;
+  border-top: 2px dashed #cbd5e1;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 0;
+}
+
+.sp-converge-arrow {
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1;
+  margin: 2px 0;
+}
+
+.sp-converge-box {
+  background: var(--navy);
+  background-image: radial-gradient(circle at 100% 0%, #1e293b 0%, #0f172a 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 18px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  max-width: 380px;
+  width: 55%;
+  position: relative;
+}
+.sp-converge-box::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), #ff8c33);
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.sp-converge-icon  { font-size: 22px; }
+.sp-converge-label { font-size: 14px; font-weight: 700; }
+.sp-converge-sub   { font-size: 12px; color: #94a3b8; }
+
+/* SP Detail Panel */
+.sp-detail-panel {
+  margin-top: 14px;
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid rgba(226,232,240,0.6);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: none;
+  animation: sdpSlideDown 0.2s ease;
+}
+.sp-detail-panel.visible { display: block; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .sources-grid { grid-template-columns: repeat(2, 1fr); }
@@ -924,18 +1073,18 @@ body {
   <div class="partner-types-grid" id="partnerTypesGrid"></div>
 
   <!-- LEGEND -->
-  <div class="section-header">
+  <div class="section-header" style="margin-top: 48px;">
     <div class="section-label w-purple">Ownership Key</div>
   </div>
   <div class="legend" id="legend"></div>
 
-  <!-- WORKFLOW -->
-  <div class="section-header">
-    <div class="section-label">Workflow — Standard Partners</div>
-    <span style="font-size:12px;color:var(--muted);">Click any step to view details</span>
+  <!-- SOURCE PATHS + WORKFLOW -->
+  <div class="section-header" style="margin-top: 40px;">
+    <div class="section-label w-blue">End-to-End Partner Acquisition Workflow</div>
+    <span style="font-size:12px;color:var(--muted);">Click any step for details</span>
   </div>
-  
-  <div class="flow-wrapper" id="flowWrapper"></div>
+  <div id="sourcePathsDiagram"></div>
+  <div class="flow-wrapper" id="flowWrapper" style="margin-top:24px;"></div>
 
   <!-- OBSERVATIONS -->
   <div class="section-header" style="margin-top: 56px;">
@@ -949,20 +1098,21 @@ body {
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
 const owners = {
-  addison: { label: 'Addison',        role: 'ANZ Regional Partner Manager',       color: '#6366f1' },
-  conor:   { label: 'Conor Breen',    role: 'Sr. Sales & Partnerships Engineer',  color: '#0ea5e9' },
-  noam:    { label: 'Noam Horenczyk', role: 'Principal, Technology Partnerships', color: '#10b981' },
-  sales:   { label: 'Sales / AE',     role: 'Account Executives & BDRs',          color: '#f59e0b' },
-  system:  { label: 'Salesforce',     role: 'Automated System',                   color: '#64748b' },
-  partner: { label: 'Partner',        role: 'Prospective Partner',                color: '#8b5cf6' },
-  mixed:   { label: 'Multiple',       role: 'Various stakeholders',               color: '#06b6d4' },
+  addison:    { label: 'Addison',        role: 'ANZ Regional Partner Manager',       color: '#6366f1' },
+  conor:      { label: 'Conor Breen',    role: 'Sr. Sales & Partnerships Engineer',  color: '#0ea5e9' },
+  noam:       { label: 'Noam Horenczyk', role: 'Principal, Technology Partnerships', color: '#10b981' },
+  sales:      { label: 'Sales / AE',     role: 'Account Executives & BDRs',          color: '#f59e0b' },
+  fieldmktg:  { label: 'Field Marketing', role: 'Field Marketing Team',              color: '#f43f5e' },
+  system:     { label: 'Salesforce',     role: 'Automated System',                   color: '#64748b' },
+  partner:    { label: 'Partner',        role: 'Prospective Partner',                color: '#8b5cf6' },
+  mixed:      { label: 'Multiple',       role: 'Various stakeholders',               color: '#06b6d4' },
 };
 
 const sources = [
   { pct:'50%', name:'Inbound',   icon: '📥', desc:'Become a Partner form submissions & Sales/BDR redirects from Demo requests', color:'#6366f1', bg:'#e0e7ff' },
   { pct:'30%', name:'Events',    icon: '🎪', desc:'Tradeshows and partner-led events across ANZ region',                        color:'#0ea5e9', bg:'#e0f2fe' },
   { pct:'10%', name:'Outbound',  icon: '📤', desc:'Direct prospecting by Addison when bandwidth allows',                        color:'#10b981', bg:'#d1fae5' },
-  { pct:'10%', name:'Referrals & Other',     icon: '🤝', desc:'Ad hoc referrals, warm intros, and miscellaneous enquiries',                 color:'#f59e0b', bg:'#fef3c7' },
+  { pct:'10%', name:'Other',     icon: '🤝', desc:'Ad hoc referrals, warm intros, and miscellaneous enquiries',                 color:'#f59e0b', bg:'#fef3c7' },
 ];
 
 const partnerTypes = [
@@ -1224,8 +1374,8 @@ function renderFlow() {
   const wrapper = document.getElementById('flowWrapper');
 
   const phases = [
-    { id: 'entry',      label: 'Lead Entry',    icon: '📥', color: '#6366f1',
-      steps: [ { id:1, short:'Lead Entry & Queue' }, { id:2, short:'Initial Outreach' }, { id:3, short:'Meeting Scheduled?' } ]
+    { id: 'outreach',   label: 'Outreach',      icon: '📧', color: '#6366f1',
+      steps: [ { id:2, short:'Initial Outreach' }, { id:3, short:'Meeting Scheduled?' } ]
     },
     { id: 'qualify',    label: 'Qualification', icon: '🔍', color: '#0ea5e9',
       steps: [ { id:4, short:'Discovery Call' }, { id:5, short:'Partnership Fit?' } ]
@@ -1403,9 +1553,248 @@ function renderNotes() {
     </div>`).join('');
 }
 
+// ─── SOURCE PATHS DATA ────────────────────────────────────────────────────
+
+const sourcePaths = [
+  {
+    id: 'inbound-form',
+    icon: '📋', name: 'Inbound — Partner Page', pct: '~35%',
+    color: '#6366f1', bg: '#e0e7ff',
+    steps: [
+      {
+        num: 1, owner: 'partner',
+        label: 'Prospect fills Become a Partner form',
+        detail: 'The prospect finds the Become a Partner page on the Simpro website and submits their details — name, company, and reason for interest. This is the most common and highest-volume inbound path.',
+        tools: ['Simpro Website', 'Become a Partner Form'],
+      },
+      {
+        num: 2, owner: 'system',
+        label: 'Lead lands in AU/NZ Partner Queue',
+        detail: 'The form submission auto-creates a lead record in Salesforce and routes it to the shared NZ/AU Partner Queue — the holding area Addison monitors for inbound partner enquiries.',
+        note: 'No automated alert exists. Addison checks this queue manually each week, so a lead can sit for up to 7 days before first contact.',
+        tools: ['Salesforce (Partner Queue)'],
+      },
+      {
+        num: 3, owner: 'addison',
+        label: 'Addison picks lead up from queue',
+        detail: 'Addison reviews the queue on her regular check-in and claims the lead, moving it into her active pipeline ready for outreach.',
+        tools: ['Salesforce'],
+      },
+    ],
+  },
+  {
+    id: 'inbound-demo',
+    icon: '📅', name: 'Inbound — Book a Demo', pct: '~15%',
+    color: '#0ea5e9', bg: '#e0f2fe',
+    steps: [
+      {
+        num: 1, owner: 'partner',
+        label: 'Prospect books a software demo',
+        detail: 'The prospect arrives via the standard Simpro sales funnel — they\'re looking for field service software, not necessarily a partnership. They book a demo through the usual channel.',
+        tools: ['Simpro Website', 'Demo Booking Form'],
+      },
+      {
+        num: 2, owner: 'sales',
+        label: 'BDR/AE identifies partner potential',
+        detail: 'During or after the demo, the BDR or AE recognises the prospect is a better fit as a partner (e.g., a consultant, bookkeeper, or business coach) rather than a direct software customer.',
+        tools: ['Google Meet / Phone', 'Salesforce'],
+      },
+      {
+        num: 3, owner: 'sales',
+        label: 'Lead reassigned & Addison notified',
+        detail: 'The BDR/AE reassigns the Salesforce lead record to Addison. They also reach out separately — via Salesforce Chatter, a Slack message, or a warm intro email — to flag the handoff.',
+        tools: ['Salesforce (Chatter)', 'Slack', 'Email'],
+      },
+    ],
+  },
+  {
+    id: 'events',
+    icon: '🎪', name: 'Events', pct: '~30%',
+    color: '#10b981', bg: '#d1fae5',
+    steps: [
+      {
+        num: 1, owner: 'mixed',
+        label: 'Prospect met at tradeshow or event',
+        detail: 'Addison or a Sales/AE representative connects with a prospect in person at a tradeshow, industry event, or partner-run event across ANZ. Cards are exchanged and interest noted.',
+        tools: ['In-person / Events'],
+      },
+      {
+        num: 2, owner: 'fieldmktg',
+        label: 'Lead list compiled & uploaded to Salesforce',
+        detail: 'After the event, Field Marketing compiles all contacts collected into a lead list and bulk-uploads them into Salesforce.',
+        tools: ['Salesforce (Lead Import)'],
+      },
+      {
+        num: 3, owner: 'addison',
+        label: 'Leads appear in My Leads view',
+        detail: 'Uploaded event leads appear in Addison\'s My Leads view in Salesforce, sitting in her queue and ready for outreach.',
+        tools: ['Salesforce (My Leads)'],
+      },
+    ],
+  },
+  {
+    id: 'outbound',
+    icon: '📤', name: 'Outbound', pct: '~10%',
+    color: '#f59e0b', bg: '#fef3c7',
+    informal: true,
+    steps: [
+      {
+        num: 1, owner: 'addison',
+        label: 'Addison identifies a prospect',
+        detail: 'Addison spots a potential partner through market knowledge, a referral tip, or direct research. This is proactive and driven by Addison\'s own judgment and network — bandwidth permitting.',
+        tools: ['Market Research', 'LinkedIn'],
+      },
+      {
+        num: 2, owner: 'addison',
+        label: 'Tracked informally — no Salesforce record yet',
+        detail: 'At this stage, no Salesforce lead or Partner Account is created. Addison tracks outbound prospects via Calendar reminders or Notion until a meeting is held and interest confirmed.',
+        note: 'A Salesforce record is only created after a discovery meeting and the prospect shows genuine interest in the Partner Agreement.',
+        tools: ['Google Calendar (Reminders)', 'Notion'],
+        informal: true,
+      },
+    ],
+  },
+  {
+    id: 'referral',
+    icon: '🤝', name: 'Referrals & Other', pct: '~10%',
+    color: '#8b5cf6', bg: '#f3e8ff',
+    informal: true,
+    steps: [
+      {
+        num: 1, owner: 'partner',
+        label: 'Existing partner makes a warm intro',
+        detail: 'Another partner — often a business coach or consultant — refers someone they know into the ecosystem and makes a direct warm introduction to Addison via email, phone, or in person.',
+        tools: ['Email', 'Phone', 'In-person'],
+      },
+      {
+        num: 2, owner: 'addison',
+        label: 'Tracked informally — no Salesforce record yet',
+        detail: 'Like outbound, referral leads aren\'t entered into Salesforce immediately. They\'re managed informally until a meeting takes place and the prospect confirms interest.',
+        note: 'A Salesforce record is only created after a discovery meeting and the prospect shows genuine interest in the Partner Agreement.',
+        tools: ['Email', 'Calendar'],
+        informal: true,
+      },
+    ],
+  },
+];
+
+// ─── SOURCE PATHS RENDER ──────────────────────────────────────────────────
+
+let _selectedSpStep = null;
+
+function selectSpStep(sourceId, stepIdx) {
+  const source = sourcePaths.find(s => s.id === sourceId);
+  if (!source) return;
+  const step = source.steps[stepIdx];
+  const o = owners[step.owner];
+  const key = sourceId + '-' + stepIdx;
+
+  // Deselect previous
+  if (_selectedSpStep) {
+    const prev = document.getElementById('sp-' + _selectedSpStep);
+    if (prev) prev.classList.remove('sp-active');
+  }
+
+  // Toggle off
+  if (_selectedSpStep === key) {
+    _selectedSpStep = null;
+    closeSpDetail();
+    return;
+  }
+
+  _selectedSpStep = key;
+  const card = document.getElementById('sp-' + key);
+  if (card) card.classList.add('sp-active');
+
+  const detailHtml = `
+    <div class="sdp-header">
+      <div class="sdp-title">
+        <div class="sdp-num" style="background:${source.color}">${step.num}</div>
+        <div class="sdp-info">
+          <div class="sdp-label">${step.label}</div>
+          <div class="sdp-badges">
+            <span class="owner-badge" style="color:${o.color};background:rgba(${parseInt(o.color.slice(1,3),16)},${parseInt(o.color.slice(3,5),16)},${parseInt(o.color.slice(5,7),16)},0.1)">${o.label}</span>
+            <span class="owner-badge" style="color:${source.color};background:${source.bg}">${source.name}</span>
+            ${step.informal ? '<span class="type-badge">Informal tracking</span>' : ''}
+          </div>
+        </div>
+      </div>
+      <button class="sdp-close" onclick="closeSpDetail()">✕ Close</button>
+    </div>
+    <div class="sdp-body">
+      <div class="detail-body">${step.detail}</div>
+      ${step.note ? `<div class="detail-note"><div class="detail-note-icon">⚠️</div><div>${step.note}</div></div>` : ''}
+      ${step.tools && step.tools.length ? `
+        <div class="detail-sub-label">Tools &amp; Systems</div>
+        <div class="tools-row">${step.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
+    </div>
+  `;
+
+  const panel = document.getElementById('spDetailPanel');
+  panel.innerHTML = detailHtml;
+  panel.classList.add('visible');
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+
+function closeSpDetail() {
+  if (_selectedSpStep) {
+    const prev = document.getElementById('sp-' + _selectedSpStep);
+    if (prev) prev.classList.remove('sp-active');
+    _selectedSpStep = null;
+  }
+  const panel = document.getElementById('spDetailPanel');
+  if (panel) { panel.classList.remove('visible'); panel.innerHTML = ''; }
+}
+
+function renderSourcePaths() {
+  const container = document.getElementById('sourcePathsDiagram');
+
+  let gridHtml = '<div class="sp-grid">';
+  sourcePaths.forEach(source => {
+    gridHtml += `<div class="sp-col">
+      <div class="sp-header" style="background:${source.bg};border-color:${source.color}22">
+        <div class="sp-header-icon">${source.icon}</div>
+        <div class="sp-header-name">${source.name}</div>
+        <div class="sp-header-pct" style="color:${source.color}">${source.pct}</div>
+      </div>`;
+
+    source.steps.forEach((step, idx) => {
+      const o = owners[step.owner];
+      const key = source.id + '-' + idx;
+      gridHtml += `
+        <div class="sp-step" id="sp-${key}" onclick="selectSpStep('${source.id}', ${idx})">
+          <div class="sp-step-num" style="background:${source.color}">${step.num}</div>
+          <div class="sp-step-label">${step.label}</div>
+          <div class="sp-step-owner">
+            <div class="sp-odot" style="background:${o.color}"></div>
+            <div class="sp-oname">${o.label}</div>
+          </div>
+          ${step.informal ? '<div class="sp-informal-tag">Informal</div>' : ''}
+        </div>`;
+    });
+
+    gridHtml += `<div class="sp-col-arrow">↓</div></div>`;
+  });
+  gridHtml += '</div>';
+
+  const convergeHtml = `
+    <div class="sp-converge-wrapper">
+      <div class="sp-converge-top-bar"></div>
+      <div class="sp-converge-arrow">↓</div>
+      <div class="sp-converge-box">
+        <div class="sp-converge-icon">📧</div>
+        <div class="sp-converge-label">Initial Outreach Email</div>
+        <div class="sp-converge-sub">All sources enter the standard workflow here ↓</div>
+      </div>
+    </div>`;
+
+  container.innerHTML = gridHtml + convergeHtml + '<div class="sp-detail-panel" id="spDetailPanel"></div>';
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────
 renderSources();
 renderPartnerTypes();
+renderSourcePaths();
 renderLegend();
 renderFlow();
 renderNotes();
