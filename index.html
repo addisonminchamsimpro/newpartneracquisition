@@ -307,9 +307,8 @@ body {
   border-color: var(--muted);
 }
 
-/* ── FLOW WRAPPER (TIMELINE) ── */
+/* ── FLOW WRAPPER ── */
 .flow-wrapper {
-  max-width: 800px;
   margin-top: 16px;
 }
 
@@ -684,10 +683,195 @@ body {
 .note-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
 .note-text  { font-size: 13px; color: var(--slate); line-height: 1.6; }
 
+/* ── LINEAR FLOW ── */
+.linear-flow {
+  display: flex;
+  align-items: stretch;
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid rgba(226,232,240,0.6);
+  box-shadow: var(--shadow-md);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.linear-flow::-webkit-scrollbar { height: 4px; }
+.linear-flow::-webkit-scrollbar-track { background: transparent; }
+.linear-flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.lf-phase {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+}
+.lf-phase:last-child { border-right: none; }
+
+.lf-ph {
+  padding: 10px 14px 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 1px solid var(--border);
+  height: 42px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.lf-ph-icon { font-size: 14px; line-height: 1; }
+.lf-ph-label { font-size: 12px; font-weight: 700; color: var(--navy); }
+.lf-ph-count { font-size: 11px; color: var(--muted); font-weight: 500; margin-left: 2px; }
+
+.lf-ps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 12px;
+  flex: 1;
+}
+
+/* Step cards in linear flow */
+.lf-step {
+  width: 92px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border: 1px solid rgba(226,232,240,0.8);
+  border-radius: 10px;
+  padding: 9px 8px 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.lf-step:hover {
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+}
+.lf-step.active {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+.lf-step.is-decision { background: #fffcf3; border-style: dashed; }
+.lf-step.is-decision:hover,
+.lf-step.is-decision.active { background: #fffbeb; }
+
+.lf-num {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  color: white; flex-shrink: 0;
+  margin-bottom: 5px;
+}
+.lf-num.is-diamond { border-radius: 4px; transform: rotate(45deg); }
+.lf-num.is-diamond span { transform: rotate(-45deg); display: block; }
+
+.lf-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.lf-owner { display: flex; align-items: center; gap: 4px; }
+.lf-odot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.lf-oname { font-size: 10px; color: var(--muted); font-weight: 500; }
+
+.lf-arr {
+  color: var(--muted);
+  font-size: 16px;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Connector between phases */
+.lf-connector {
+  width: 28px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lf-connector-top {
+  height: 42px;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+}
+.lf-connector-mid {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.decision-pill {
+  display: inline-block;
+  font-size: 10px;
+  color: #92400e;
+  background: #fef3c7;
+  padding: 1px 6px;
+  border-radius: 100px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Step Detail Panel */
+.step-detail-panel {
+  margin-top: 12px;
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid rgba(226,232,240,0.6);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: none;
+  animation: sdpSlideDown 0.2s ease;
+}
+@keyframes sdpSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.step-detail-panel.visible { display: block; }
+.sdp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.sdp-title { display: flex; align-items: center; gap: 12px; }
+.sdp-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.sdp-label { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.sdp-badges { display: flex; gap: 8px; align-items: center; }
+.sdp-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--slate);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.sdp-close:hover { background: var(--bg-alt); color: var(--navy); border-color: var(--muted); }
+.sdp-body { padding: 20px; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .sources-grid { grid-template-columns: repeat(2, 1fr); }
   .partner-types-grid { grid-template-columns: repeat(2, 1fr); }
+  .linear-flow { border-radius: 12px; }
 }
 @media (max-width: 768px) {
   .header { padding: 32px 24px; }
@@ -748,10 +932,7 @@ body {
   <!-- WORKFLOW -->
   <div class="section-header">
     <div class="section-label">Workflow — Standard Partners</div>
-    <div class="flow-controls">
-      <button class="btn-control" onclick="toggleAllSteps(true)">Expand All</button>
-      <button class="btn-control" onclick="toggleAllSteps(false)">Collapse All</button>
-    </div>
+    <span style="font-size:12px;color:var(--muted);">Click any step to view details</span>
   </div>
   
   <div class="flow-wrapper" id="flowWrapper"></div>
@@ -1042,107 +1223,173 @@ function renderFlow() {
   const steps = workflows['standard'];
   const wrapper = document.getElementById('flowWrapper');
 
-  const prefix = `
-    <div class="merge-container">
-      <div class="merge-header">
-        <div class="merge-source" style="background: #eef2ff; border: 1px solid #c7d2fe; color: #4338ca">
-          📥 Inbound <small>50%</small>
+  const phases = [
+    { id: 'entry',      label: 'Lead Entry',    icon: '📥', color: '#6366f1',
+      steps: [ { id:1, short:'Lead Entry & Queue' }, { id:2, short:'Initial Outreach' }, { id:3, short:'Meeting Scheduled?' } ]
+    },
+    { id: 'qualify',    label: 'Qualification', icon: '🔍', color: '#0ea5e9',
+      steps: [ { id:4, short:'Discovery Call' }, { id:5, short:'Partnership Fit?' } ]
+    },
+    { id: 'contract',   label: 'Contracting',   icon: '📄', color: '#f59e0b',
+      steps: [ { id:6, short:'Program Overview' }, { id:7, short:'Follow-Up & Contracts' }, { id:8, short:'Agreement Signed?' } ]
+    },
+    { id: 'onboarding', label: 'Onboarding',    icon: '🚀', color: '#10b981',
+      steps: [ { id:9, short:'Auto Onboarding Sequence' }, { id:10, short:'Activation Check-in' } ]
+    },
+    { id: 'active',     label: 'Active',        icon: '🤝', color: '#8b5cf6',
+      steps: [ { id:11, short:'Ongoing Management' } ]
+    }
+  ];
+
+  const stepsMap = {};
+  steps.forEach(s => stepsMap[s.id] = s);
+
+  let html = '<div class="linear-flow">';
+
+  phases.forEach((phase, pi) => {
+    // Inter-phase connector (not before the first phase)
+    if (pi > 0) {
+      html += `
+        <div class="lf-connector">
+          <div class="lf-connector-top"></div>
+          <div class="lf-connector-mid">›</div>
+        </div>`;
+    }
+
+    html += `
+      <div class="lf-phase">
+        <div class="lf-ph" style="border-top: 3px solid ${phase.color}">
+          <span class="lf-ph-icon">${phase.icon}</span>
+          <span class="lf-ph-label">${phase.label}</span>
+          <span class="lf-ph-count">${phase.steps.length}</span>
         </div>
-        <div class="merge-source" style="background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1">
-          🎪 Events <small>30%</small>
+        <div class="lf-ps">`;
+
+    phase.steps.forEach((ps, si) => {
+      const step = stepsMap[ps.id];
+      const o = owners[step.owner];
+      const isDec = step.type === 'decision';
+
+      if (si > 0) html += `<span class="lf-arr">›</span>`;
+
+      html += `
+        <div class="lf-step${isDec ? ' is-decision' : ''}" id="sc-${step.id}" onclick="selectStep(${step.id})">
+          <div class="lf-num${isDec ? ' is-diamond' : ''}" style="background:${isDec ? '#f59e0b' : phase.color}">
+            <span>${step.id}</span>
+          </div>
+          <div class="lf-name">${ps.short}</div>
+          <div class="lf-owner">
+            <div class="lf-odot" style="background:${o.color}"></div>
+            <div class="lf-oname">${o.label}</div>
+          </div>
+          ${isDec ? '<div class="decision-pill">Decision</div>' : ''}
+        </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>
+    <div class="step-detail-panel" id="detailPanel">
+      <div class="sdp-header">
+        <div class="sdp-title">
+          <div class="sdp-num" id="sdpNum"></div>
+          <div class="sdp-info">
+            <div class="sdp-label" id="sdpLabel"></div>
+            <div class="sdp-badges" id="sdpBadges"></div>
+          </div>
         </div>
-        <div class="merge-source" style="background: #d1fae5; border: 1px solid #a7f3d0; color: #047857">
-          📤 Outbound <small>10%</small>
-        </div>
+        <button class="sdp-close" onclick="closeDetail()">✕ Close</button>
       </div>
-      <div class="merge-lines"></div>
-      <div class="merge-line-center"></div>
-      <div class="merge-note">Sources merge into unified queue</div>
-    </div>
-    <div class="timeline">
-  `;
-  
-  const suffix = `</div>`;
+      <div class="sdp-body" id="sdpBody"></div>
+    </div>`;
 
-  const stepsHtml = steps.map((step, idx) => {
-    const o = owners[step.owner];
-    const color = o.color;
-    const isDec = step.type === 'decision';
-
-    const detailHtml = `
-      <div class="detail-body">${step.detail}</div>
-      ${step.note ? `<div class="detail-note"><div class="detail-note-icon">⚠️</div><div>${step.note}</div></div>` : ''}
-      ${step.tools && step.tools.length ? `
-        <div class="detail-sub-label">Tools &amp; Systems</div>
-        <div class="tools-row">${step.tools.map(t=>`<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
-      ${isDec && step.outcomes ? `
-        <div class="detail-sub-label">Outcomes</div>
-        <div class="outcomes-row">
-          <div class="outcome-item yes">
-            <div class="outcome-icon">✅</div>
-            <div class="outcome-text"><strong>Yes</strong> ${step.outcomes.yes}</div>
-          </div>
-          <div class="outcome-item no">
-            <div class="outcome-icon">❌</div>
-            <div class="outcome-text"><strong>No</strong> ${step.outcomes.no}</div>
-          </div>
-        </div>` : ''}`;
-
-    return `
-      <div class="step-block">
-        <div class="step-marker ${isDec ? 'diamond' : ''}" style="background:${isDec ? '#f59e0b' : color}">
-          <span>${step.id}</span>
-        </div>
-        <div class="step-row ${isDec ? 'is-decision' : ''}" id="sr-${step.id}" onclick="toggleStep(${step.id})">
-          <div class="step-header">
-            <div class="step-text">
-              <div class="step-label">${step.label}</div>
-              <div class="step-badges">
-                <span class="owner-badge" style="color:${color};background:${tint(color,0.1)}">${o.label}</span>
-                ${isDec ? '<span class="type-badge">Decision Point</span>' : ''}
-              </div>
-            </div>
-            <div class="step-chevron">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-          </div>
-          <div class="step-detail" id="sd-${step.id}">
-            <div class="step-detail-inner">
-              <div class="step-detail-content">${detailHtml}</div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
-
-  wrapper.innerHTML = prefix + stepsHtml + suffix;
+  wrapper.innerHTML = html;
 }
 
 // ─── INTERACTIONS ─────────────────────────────────────────────────────────
 
-function toggleStep(id) {
-  const row    = document.getElementById('sr-' + id);
-  const isOpen = row.classList.contains('open');
+const _phaseColorMap = {
+  1:'#6366f1', 2:'#6366f1', 3:'#6366f1',
+  4:'#0ea5e9', 5:'#0ea5e9',
+  6:'#f59e0b', 7:'#f59e0b', 8:'#f59e0b',
+  9:'#10b981', 10:'#10b981',
+  11:'#8b5cf6'
+};
+let _selectedStep = null;
 
-  if (isOpen) {
-    row.classList.remove('open');
-  } else {
-    // Optional: close others first for accordion style
-    // document.querySelectorAll('.step-row.open').forEach(el => el.classList.remove('open'));
-    row.classList.add('open');
+function selectStep(id) {
+  const step = workflows['standard'].find(s => s.id === id);
+  const o = owners[step.owner];
+  const isDec = step.type === 'decision';
+  const color = isDec ? '#f59e0b' : (_phaseColorMap[id] || o.color);
+
+  // Deselect previous card
+  if (_selectedStep) {
+    const prev = document.getElementById('sc-' + _selectedStep);
+    if (prev) prev.classList.remove('active');
   }
+
+  // Toggle off if clicking the same step
+  if (_selectedStep === id) {
+    _selectedStep = null;
+    closeDetail();
+    return;
+  }
+
+  _selectedStep = id;
+  const card = document.getElementById('sc-' + id);
+  if (card) card.classList.add('active');
+
+  // Populate the detail panel
+  const sdpNum = document.getElementById('sdpNum');
+  sdpNum.textContent = id;
+  sdpNum.style.background = color;
+
+  document.getElementById('sdpLabel').textContent = step.label;
+  document.getElementById('sdpBadges').innerHTML = `
+    <span class="owner-badge" style="color:${o.color};background:${tint(o.color,0.1)}">${o.label}</span>
+    ${isDec ? '<span class="type-badge">Decision Point</span>' : ''}
+  `;
+
+  const detailHtml = `
+    <div class="detail-body">${step.detail}</div>
+    ${step.note ? `<div class="detail-note"><div class="detail-note-icon">⚠️</div><div>${step.note}</div></div>` : ''}
+    ${step.tools && step.tools.length ? `
+      <div class="detail-sub-label">Tools &amp; Systems</div>
+      <div class="tools-row">${step.tools.map(t=>`<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
+    ${isDec && step.outcomes ? `
+      <div class="detail-sub-label">Outcomes</div>
+      <div class="outcomes-row">
+        <div class="outcome-item yes">
+          <div class="outcome-icon">✅</div>
+          <div class="outcome-text"><strong>Yes</strong> ${step.outcomes.yes}</div>
+        </div>
+        <div class="outcome-item no">
+          <div class="outcome-icon">❌</div>
+          <div class="outcome-text"><strong>No</strong> ${step.outcomes.no}</div>
+        </div>
+      </div>` : ''}
+  `;
+
+  document.getElementById('sdpBody').innerHTML = detailHtml;
+
+  const panel = document.getElementById('detailPanel');
+  panel.classList.add('visible');
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 }
 
-function toggleAllSteps(forceOpen) {
-  const rows = document.querySelectorAll('.step-row');
-  rows.forEach(row => {
-    if (forceOpen) {
-      row.classList.add('open');
-    } else {
-      row.classList.remove('open');
-    }
-  });
+function closeDetail() {
+  if (_selectedStep) {
+    const card = document.getElementById('sc-' + _selectedStep);
+    if (card) card.classList.remove('active');
+    _selectedStep = null;
+  }
+  const panel = document.getElementById('detailPanel');
+  if (panel) panel.classList.remove('visible');
 }
+
+function toggleAllSteps() { /* no-op — pipeline view */ }
 
 function renderNotes() {
   document.getElementById('notesGrid').innerHTML = notes.map(n => `
@@ -1164,7 +1411,7 @@ renderFlow();
 renderNotes();
 
 // Open the first step by default
-setTimeout(() => toggleStep(1), 300);
+setTimeout(() => selectStep(1), 300);
 
 </script>
 </body>
