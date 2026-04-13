@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANZ Partner Acquisition & Onboarding — Simpro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orange: #FF6600;
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --slate: #475569;
+  --muted: #94a3b8;
+  --border: #e2e8f0;
+  --bg: #f8fafc;
+  --bg-alt: #f1f5f9;
+  --white: #ffffff;
+  
+  /* Refined Role Colors */
+  --c-addison: #6366f1; /* Indigo */
+  --c-conor:   #0ea5e9; /* Sky */
+  --c-noam:    #10b981; /* Emerald */
+  --c-sales:   #f59e0b; /* Amber */
+  --c-system:  #64748b; /* Slate */
+  --c-partner: #8b5cf6; /* Violet */
+  --c-mixed:   #06b6d4; /* Cyan */
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03);
+  --shadow-hover: 0 12px 20px -4px rgba(0,0,0,0.08), 0 4px 8px -2px rgba(0,0,0,0.04);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--navy);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  background-image: radial-gradient(circle at 100% 0%, #1e293b 0%, #0f172a 100%);
+  color: white;
+  padding: 48px 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange), #ff8c33);
+}
+.header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;
+  z-index: 2;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,102,0,0.15);
+  color: #ff9d5c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,102,0,0.3);
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+}
+.header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.header-subtitle {
+  font-size: 15px;
+  color: #cbd5e1;
+  max-width: 580px;
+  line-height: 1.6;
+}
+.header-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.meta-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: right;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  backdrop-filter: blur(8px);
+}
+.meta-pill strong {
+  display: block;
+  font-size: 14px;
+  color: white;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── SECTION LABEL ── */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  margin-top: 48px;
+}
+.section-header:first-child { margin-top: 0; }
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--muted);
+}
+.section-label.w-blue::before { background: var(--c-conor); }
+.section-label.w-orange::before { background: var(--orange); }
+.section-label.w-purple::before { background: var(--c-partner); }
+
+/* ── SOURCES ── */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.source-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px 20px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+.source-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+.source-icon-wrap {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+.source-pct {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+}
+.source-name {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--navy);
+}
+.source-desc {
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 1.5;
+  margin-top: auto;
+}
+
+/* ── PARTNER TYPES ── */
+.partner-types-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pt-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: box-shadow 0.2s ease;
+}
+.pt-card:hover { box-shadow: var(--shadow-md); }
+.pt-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.pt-name   { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+.pt-examples { font-size: 12px; color: var(--slate); line-height: 1.5; margin-bottom: 12px; }
+.pt-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.pt-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.pt-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--slate);
+  background: var(--bg);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 2px solid var(--border);
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border-radius: 100px;
+  padding: 6px 16px 6px 8px;
+}
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.5); }
+.legend-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+.legend-role { font-size: 12px; color: var(--slate); }
+
+/* ── WORKFLOW CONTROLS ── */
+.flow-controls {
+  display: flex;
+  gap: 12px;
+}
+.btn-control {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
+}
+.btn-control:hover {
+  background: var(--bg-alt);
+  color: var(--navy);
+  border-color: var(--muted);
+}
+
+/* ── FLOW WRAPPER (TIMELINE) ── */
+.flow-wrapper {
+  max-width: 800px;
+  margin-top: 16px;
+}
+
+/* ── SOURCE MERGE ── */
+.merge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+.merge-header {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.merge-source {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.merge-source small { font-size: 11px; font-weight: 500; opacity: 0.8; }
+.merge-note {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+}
+.merge-lines {
+  position: absolute;
+  bottom: 12px;
+  width: 66%;
+  height: 24px;
+  border-left: 2px dashed var(--border);
+  border-right: 2px dashed var(--border);
+  border-bottom: 2px dashed var(--border);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 1;
+}
+.merge-line-center {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--border));
+  z-index: 1;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 48px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 23px; /* Center of the 48px padding (24px) minus 1px width */
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ── STEP BLOCK ── */
+.step-block { 
+  position: relative; 
+  margin-bottom: 24px;
+}
+.step-block:last-child { margin-bottom: 0; }
+
+/* The Marker (Node on the timeline) */
+.step-marker {
+  position: absolute;
+  left: -48px;
+  top: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--bg);
+  transition: transform 0.2s ease;
+}
+.step-row:hover .step-marker { transform: scale(1.1); }
+
+.step-marker.diamond {
+  border-radius: 6px;
+  transform: rotate(45deg);
+}
+.step-row:hover .step-marker.diamond { transform: rotate(45deg) scale(1.1); }
+.step-marker.diamond span { transform: rotate(-45deg); display: block; }
+
+/* The clickable step card */
+.step-row {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.step-row:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--muted);
+}
+.step-row.open {
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+.step-row.is-decision {
+  background: #fffcf3;
+}
+
+/* Card Header */
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  position: relative;
+  z-index: 2;
+  background: inherit;
+}
+.step-text { flex: 1; }
+.step-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.step-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.owner-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.owner-badge::before {
+  content: '';
+  display: block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.type-badge { 
+  font-size: 11px; 
+  color: #92400e; 
+  background: #fef3c7;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.step-chevron {
+  color: var(--muted);
+  font-size: 18px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-alt);
+}
+.step-row:hover .step-chevron { background: var(--border); color: var(--navy); }
+.step-row.open .step-chevron {
+  transform: rotate(180deg);
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* ── ACCORDION DETAIL ── */
+.step-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f8fafc;
+  border-top: 1px solid transparent;
+}
+.step-row.open .step-detail { 
+  grid-template-rows: 1fr; 
+  border-top-color: var(--border);
+}
+.step-detail-inner {
+  overflow: hidden;
+}
+.step-detail-content {
+  padding: 20px;
+}
+.step-row.is-decision .step-detail { background: #fffbeb; }
+
+.detail-body {
+  font-size: 14px;
+  color: var(--slate);
+  margin-bottom: 16px;
+}
+
+/* Bullet list inside detail */
+.detail-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.detail-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.5;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.detail-list li .li-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.detail-list li strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+.detail-list li .li-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.detail-note {
+  display: flex;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.detail-note-icon { flex-shrink: 0; font-size: 16px; }
+
+.detail-sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.tool-tag {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.outcomes-row {
+  display: flex;
+  gap: 12px;
+}
+.outcome-item {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  border: 1px solid transparent;
+}
+.outcome-item.yes { background: #f0fdf4; border-color: #bbf7d0; }
+.outcome-item.no  { background: #fef2f2; border-color: #fecaca; }
+.outcome-icon { font-size: 16px; flex-shrink: 0; }
+.outcome-text { color: var(--slate); }
+.outcome-text strong { color: var(--navy); display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;}
+
+/* ── NOTES / OBSERVATIONS ── */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.note-card {
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+.note-card:hover { box-shadow: var(--shadow-md); }
+.note-card.gap         { background: #fff5f5; border: 1px solid #fed7d7; }
+.note-card.strength    { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.note-card.opportunity { background: #eef2ff; border: 1px solid #c7d2fe; }
+
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.note-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.note-card.gap .note-icon         { background: #fee2e2; color: #dc2626; }
+.note-card.strength .note-icon    { background: #dcfce7; color: #16a34a; }
+.note-card.opportunity .note-icon { background: #e0e7ff; color: #4f46e5; }
+
+.note-type {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.note-card.gap .note-type         { color: #dc2626; }
+.note-card.strength .note-type    { color: #16a34a; }
+.note-card.opportunity .note-type { color: #4f46e5; }
+
+.note-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+.note-text  { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .sources-grid { grid-template-columns: repeat(2, 1fr); }
+  .partner-types-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .header { padding: 32px 24px; }
+  .header-inner { flex-direction: column; gap: 20px; }
+  .header-meta { align-items: flex-start; }
+  .merge-container { display: none; } /* Hide complex merge visual on mobile, fallback to simple */
+  .outcomes-row { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .main { padding: 24px 16px 60px; }
+  .sources-grid, .partner-types-grid, .notes-grid { grid-template-columns: 1fr; }
+  .timeline { padding-left: 36px; }
+  .timeline::before { left: 17px; }
+  .step-marker { left: -36px; width: 24px; height: 24px; font-size: 10px; }
+  .step-header { padding: 14px 16px; }
+  .step-detail-content { padding: 16px; }
+  .step-badges { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="badge">🌏 ANZ Region</div>
+      <h1>Partner Acquisition &amp; Onboarding</h1>
+      <p class="header-subtitle">An end-to-end operational view of how we source, qualify, and onboard new partners across Australia and New Zealand — from first touch to active partnership.</p>
+    </div>
+    <div class="header-meta">
+      <div class="meta-pill"><strong>Addison Mincham</strong>Regional Partner Manager</div>
+      <div class="meta-pill"><strong>Last updated</strong>April 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SOURCES -->
+  <div class="section-header">
+    <div class="section-label w-blue">Partner Sources</div>
+  </div>
+  <div class="sources-grid" id="sourcesGrid"></div>
+
+  <!-- PARTNER TYPES -->
+  <div class="section-header">
+    <div class="section-label w-orange">Partner Types</div>
+  </div>
+  <div class="partner-types-grid" id="partnerTypesGrid"></div>
+
+  <!-- LEGEND -->
+  <div class="section-header">
+    <div class="section-label w-purple">Ownership Key</div>
+  </div>
+  <div class="legend" id="legend"></div>
+
+  <!-- WORKFLOW -->
+  <div class="section-header">
+    <div class="section-label">Workflow — Standard Partners</div>
+    <div class="flow-controls">
+      <button class="btn-control" onclick="toggleAllSteps(true)">Expand All</button>
+      <button class="btn-control" onclick="toggleAllSteps(false)">Collapse All</button>
+    </div>
+  </div>
+  
+  <div class="flow-wrapper" id="flowWrapper"></div>
+
+  <!-- OBSERVATIONS -->
+  <div class="section-header" style="margin-top: 56px;">
+    <div class="section-label">Key Observations & Analysis</div>
+  </div>
+  <div class="notes-grid" id="notesGrid"></div>
+
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+
+const owners = {
+  addison: { label: 'Addison',        role: 'ANZ Regional Partner Manager',       color: '#6366f1' },
+  conor:   { label: 'Conor Breen',    role: 'Sr. Sales & Partnerships Engineer',  color: '#0ea5e9' },
+  noam:    { label: 'Noam Horenczyk', role: 'Principal, Technology Partnerships', color: '#10b981' },
+  sales:   { label: 'Sales / AE',     role: 'Account Executives & BDRs',          color: '#f59e0b' },
+  system:  { label: 'Salesforce',     role: 'Automated System',                   color: '#64748b' },
+  partner: { label: 'Partner',        role: 'Prospective Partner',                color: '#8b5cf6' },
+  mixed:   { label: 'Multiple',       role: 'Various stakeholders',               color: '#06b6d4' },
+};
+
+const sources = [
+  { pct:'50%', name:'Inbound',   icon: '📥', desc:'Become a Partner form submissions & Sales/BDR redirects from Demo requests', color:'#6366f1', bg:'#e0e7ff' },
+  { pct:'30%', name:'Events',    icon: '🎪', desc:'Tradeshows and partner-led events across ANZ region',                        color:'#0ea5e9', bg:'#e0f2fe' },
+  { pct:'10%', name:'Outbound',  icon: '📤', desc:'Direct prospecting by Addison when bandwidth allows',                        color:'#10b981', bg:'#d1fae5' },
+  { pct:'10%', name:'Other',     icon: '🤝', desc:'Ad hoc referrals, warm intros, and miscellaneous enquiries',                 color:'#f59e0b', bg:'#fef3c7' },
+];
+
+const partnerTypes = [
+  {
+    icon:'🤝', iconBg:'#e0e7ff', iconColor: '#4f46e5', name:'Referral Partner',
+    examples:'Business coaches, consultants, VAs, marketing agencies, Simpro customers',
+    tags:[{label:'Registered (10%)',color:'#4F46E5',bg:'#EEF2FF'},{label:'Select (20%)',color:'#059669',bg:'#D1FAE5'}],
+    note:'Default recommendation for most partners'
+  },
+  {
+    icon:'⚙️', iconBg:'#e0f2fe', iconColor: '#0284c7', name:'Service Partner',
+    examples:'Consultants and implementors who handle Simpro setup, training, and ongoing support',
+    tags:[{label:'Overlaps with Referral',color:'#0284C7',bg:'#E0F2FE'}],
+    note:'Most partners hold this status in combination with Referral or Accountancy Type'
+  },
+  {
+    icon:'📊', iconBg:'#fef3c7', iconColor: '#d97706', name:'Accountancy Partner',
+    examples:'Bookkeepers, accountants, accounting associations',
+    tags:[{label:'Discount-based',color:'#D97706',bg:'#FEF3C7'}],
+    note:'Usually redirected to Referral due to AE pricing strategy and often negates the discount benefit. The Partner cannot be both a Referral and Accountancy Parntner.'
+  },
+  {
+    icon:'🔗', iconBg:'#f3e8ff', iconColor: '#7c3aed', name:'Technology Partner',
+    examples:'CRM platforms, AI receptionists, reporting tools, estimating software',
+    tags:[{label:'Integration-based',color:'#7C3AED',bg:'#F3E8FF'}],
+    note:'Separate track managed by Noam'
+  },
+];
+
+function li(icon, text) {
+  return `<li><span class="li-icon">${icon}</span><span>${text}</span></li>`;
+}
+function bullet(text) {
+  return `<li><span class="li-dot"></span><span>${text}</span></li>`;
+}
+function ul(items) { return `<ul class="detail-list">${items.join('')}</ul>`; }
+
+const workflows = {
+  standard: [
+    {
+      id:1, type:'stage', owner:'mixed',
+      label:'Lead Entry & Salesforce Queue',
+      detail: ul([
+        li('📥', '<strong>Inbound</strong> — Leads come from either the NZ/AU Partner Queue or Sales/BDRs rerouting them to Addison'),
+        li('🎪', '<strong>Events</strong> — Event Partner Leads get loaded into Salesforce and routed to Addison\'s "My Lead List"'),
+        li('📤', '<strong>Outbound</strong> — Addison identifies a prospect and reaches out directly'),
+        li('📋', 'Leads are primarily managed via the <strong>NZ/AU Partner Queue</strong> or the <strong>My Lead List</strong> in Salesforce'),
+      ]),
+      note:'The Salesforce NZ/AU Partner queue is checked manually by Addison each week — no automated alert or assignment.',
+      tools:['Salesforce (Queue & My Lead List)','Become a Partner Form','Events / In-person'],
+    },
+    {
+      id:2, type:'stage', owner:'addison',
+      label:'Initial Outreach Email',
+      detail: ul([
+        bullet('Addison sends a personalised introductory email'),
+        bullet('Acknowledges their interest and introduces himself'),
+        bullet('Requests a meeting within the next couple of weeks'),
+      ]),
+      note:null,
+      tools:['Gmail / Email','Salesforce'],
+    },
+    {
+      id:3, type:'decision', owner:'partner',
+      label:'Meeting Scheduled?',
+      detail: ul([
+        bullet('Partner responds and confirms a meeting time'),
+        bullet('Known early drop-off point — some leads go cold here despite initial interest'),
+      ]),
+      note:null, tools:[],
+      outcomes:{yes:'Proceed to Discovery Call', no:'Follow up or close lead'},
+    },
+    {
+      id:4, type:'stage', owner:'addison',
+      label:'Discovery Call',
+      detail: ul([
+        bullet('Learn about the partner\'s business and why they enquired'),
+        bullet('Understand what they want to get out of the partnership'),
+        bullet('<strong>If fit is clear</strong> — move straight into the Program Overview on the same call'),
+        bullet('<strong>If not a fit</strong> — decline respectfully on the call (e.g., low-value marketplace/aggregator platforms)'),
+      ]),
+      note:null,
+      tools:['Video call / Google Meet'],
+    },
+    {
+      id:5, type:'decision', owner:'addison',
+      label:'Assessing Partnership Fit',
+      detail: ul([
+        bullet('Addison assesses whether there\'s genuine partnership potential'),
+        bullet('<strong>Main disqualifier:</strong> marketplace or aggregator platforms that list offers but generate low traction and high Simpro effort'),
+      ]),
+      note:null, tools:[],
+      outcomes:{yes:'Continue to Program Overview', no:'Decline on call & close lead'},
+    },
+    {
+      id:6, type:'stage', owner:'addison',
+      label:'Partner Program Overview',
+      detail: ul([
+        bullet('Walk through the <strong>Partner Portal</strong> — Sandbox, submitting referrals, Partner Directory, training/resources'),
+        bullet('Discuss partner type: <strong>Referral vs. Accountancy</strong> (almost always Referral)'),
+        bullet('Confirm if they will also be a <strong>Service Partner</strong>'),
+        bullet('Collect details needed for the Partner Agreement'),
+      ]),
+      note:'Accountancy Partner discount is rarely the right choice — Sales pricing flexibility often matches or beats it.',
+      tools:['Partner Portal (Walkthrough)','Video call'],
+    },
+    {
+      id:7, type:'stage', owner:'addison',
+      label:'Post-Call Follow-Up & Contracting',
+      detail: ul([
+        li('📝', '<strong>Meeting notes</strong> summary emailed to the partner'),
+        li('📄', '<strong>Partner Agreement</strong> sent via Salesforce'),
+        li('🏦', '<strong>Banking Detail Form</strong> sent once the agreement is signed (Referral Partners only)'),
+        li('📅', '<strong>Conor Breen walkthrough invite</strong> — pre-blocked slots included for partner to self-book'),
+        li('💡', 'If it\'s obvious during the discovery call, Addison sometimes books the Conor session on the spot instead'),
+      ]),
+      note:null,
+      tools:['Salesforce (Contracts)','DocuSign','Calendar'],
+    },
+    {
+      id:8, type:'decision', owner:'partner',
+      label:'Agreement Signed?',
+      detail: ul([
+        bullet('Partner reviews and signs the Partner Agreement'),
+        bullet('Known second drop-off point — some partners go cold after a strong initial call'),
+        bullet('Addison follows up; if no response the lead is eventually closed'),
+      ]),
+      note:'Going cold after a positive conversation is a recurring pattern and a known gap in the funnel.',
+      tools:['Salesforce'],
+      outcomes:{yes:'Automated email triggered', no:'Follow up sequence initiated'},
+    },
+    {
+      id:9, type:'stage', owner:'system',
+      label:'Automated Onboarding Sequence',
+      detail: ul([
+        bullet('Triggered automatically in Salesforce the moment the agreement is signed'),
+        li('🔗', '<strong>Partner Portal</strong> access link'),
+        li('🧪', 'Instructions on requesting a <strong>Sandbox</strong> environment'),
+        li('📨', 'Guidelines on how to <strong>submit referrals</strong>'),
+        li('📁', 'Steps to set up a <strong>Partner Directory profile</strong>'),
+        li('📚', 'Links to <strong>training, enablement, and resources</strong>'),
+      ]),
+      note:null,
+      tools:['Salesforce Automation','Partner Portal'],
+    },
+    {
+      id:10, type:'stage', owner:'addison',
+      label:'Activation Check-in (1–2 Weeks)',
+      detail: ul([
+        bullet('Addison follows up roughly 1–2 weeks after onboarding'),
+        bullet('Check for any questions, portal access issues, or confusion about next steps'),
+        bullet('Identify if any additional activation support is needed'),
+      ]),
+      note:null,
+      tools:['Email / Phone'],
+    },
+    {
+      id:11, type:'stage', owner:'addison',
+      label:'Ongoing Partner Management',
+      detail: ul([
+        li('🔄', '<strong>Ad hoc check-ins</strong> for high-potential or active partners'),
+        li('✈️', '<strong>Face-to-face visits</strong> when Addison travels to the partner\'s area — relationship building and Simpro top of mind'),
+        li('🤝', '<strong>Sales/AE intro</strong> if partner wants a dedicated contact (common for Business Coaches and larger Consultancies)'),
+        li('⚖️', '<strong>AE collaboration</strong> for near-reseller partners who handle ~90% of the sale and loop in a trusted AE for pricing/licensing'),
+        li('📞', '<strong>Opportunity visibility is reactive</strong> — Addison only hears about an active deal when the partner calls'),
+      ]),
+      note:'No bulk email capability (manual workaround only) and no Partner Forum yet. Engagement is largely reactive.',
+      tools:['Email','Phone','In-person visits','HubSpot (Limited)'],
+    },
+  ],
+};
+
+const notes = [
+  {
+    type:'gap', icon: '⚠️',
+    title:'Manual Queue Monitoring',
+    text:'The Salesforce partner sign-up queue is checked manually each week. No automated alert exists, so leads can sit for up to a week before first contact is made.'
+  },
+  {
+    type:'gap', icon: '🔇',
+    title:'Limited Partner Communications',
+    text:'No Partner Forum and no easy bulk email capability. HubSpot is available but too slow to set up, so communication falls back to manual Gmail mail merges. Engagement is largely reactive.'
+  },
+  {
+    type:'gap', icon: '🙈', // Replaced placeholder text with an actual emoji
+    title:'Blindspot: Deal Visibility',
+    text:'Simpro has no visibility into partner-sourced opportunities until the partner proactively calls or submits a deal via the Portal. Partners also have no insight into how their deals are progressing — no meetings held, no AE notes visible in the portal. No two-way sync exists.'
+  },
+  {
+    type:'gap', icon: '💸',
+    title:'Missed Deal Registrations',
+    text:'Partners don\'t always submit referrals via the Portal, or don\'t notify Addison. Without that tagging step, the referral isn\'t counted toward targets and the partner misses out on commission if the deal converts.'
+  },
+  {
+    type:'gap', icon: '🕵️',
+    title:'Unattributed Organic Referrals',
+    text:'Sales team members rarely dig into where an organic lead heard about Simpro. A lead saying "my accountant told me" often goes unprobed — the deal goes untagged, the partner misses commission, and a potential new partner isn\'t acquired.'
+  },
+  {
+    type:'opportunity', icon: '🚀',
+    title:'Simpro Customer Referrals',
+    text:'Existing Simpro customers are a largely untapped referral source. A more structured motion for converting active customers into Referral Partners could unlock significant pipeline with relatively low acquisition effort.'
+  },
+  {
+    type:'strength', icon: '🛤️',
+    title:'Clear Routing Between Tracks',
+    text:'Referral/Service/Accountancy and Technology partners are cleanly separated between Addison and Noam early on, preventing confusion and keeping each track moving efficiently.'
+  },
+  {
+    type:'strength', icon: '🎯',
+    title:'Selective Enablement',
+    text:'The Conor Breen product walkthrough is offered selectively — either in the post-call follow-up or booked on the spot during discovery if clearly needed, rather than applied as a blanket rule to every partner.'
+  },
+];
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────
+
+function tint(hex, alpha) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────
+
+function renderSources() {
+  document.getElementById('sourcesGrid').innerHTML = sources.map(s => `
+    <div class="source-card" style="border-top: 4px solid ${s.color}">
+      <div class="source-icon-wrap" style="background: ${s.bg}; color: ${s.color}">${s.icon}</div>
+      <div class="source-pct" style="color:${s.color}">${s.pct}</div>
+      <div class="source-name">${s.name}</div>
+      <div class="source-desc">${s.desc}</div>
+    </div>`).join('');
+}
+
+function renderPartnerTypes() {
+  document.getElementById('partnerTypesGrid').innerHTML = partnerTypes.map(pt => `
+    <div class="pt-card">
+      <div class="pt-icon" style="background:${pt.iconBg}; color:${pt.iconColor}">${pt.icon}</div>
+      <div class="pt-name">${pt.name}</div>
+      <div class="pt-examples">${pt.examples}</div>
+      <div class="pt-tags">${pt.tags.map(t=>`<span class="pt-tag" style="color:${t.color};background:${t.bg}">${t.label}</span>`).join('')}</div>
+      ${pt.note ? `<div class="pt-note">${pt.note}</div>` : ''}
+    </div>`).join('');
+}
+
+function renderLegend() {
+  document.getElementById('legend').innerHTML = Object.entries(owners).map(([,o]) => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${o.color}"></div>
+      <span class="legend-name">${o.label}</span>
+      <span class="legend-role">— ${o.role}</span>
+    </div>`).join('');
+}
+
+function renderFlow() {
+  const steps = workflows['standard'];
+  const wrapper = document.getElementById('flowWrapper');
+
+  const prefix = `
+    <div class="merge-container">
+      <div class="merge-header">
+        <div class="merge-source" style="background: #eef2ff; border: 1px solid #c7d2fe; color: #4338ca">
+          📥 Inbound <small>50%</small>
+        </div>
+        <div class="merge-source" style="background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1">
+          🎪 Events <small>30%</small>
+        </div>
+        <div class="merge-source" style="background: #d1fae5; border: 1px solid #a7f3d0; color: #047857">
+          📤 Outbound <small>10%</small>
+        </div>
+      </div>
+      <div class="merge-lines"></div>
+      <div class="merge-line-center"></div>
+      <div class="merge-note">Sources merge into unified queue</div>
+    </div>
+    <div class="timeline">
+  `;
+  
+  const suffix = `</div>`;
+
+  const stepsHtml = steps.map((step, idx) => {
+    const o = owners[step.owner];
+    const color = o.color;
+    const isDec = step.type === 'decision';
+
+    const detailHtml = `
+      <div class="detail-body">${step.detail}</div>
+      ${step.note ? `<div class="detail-note"><div class="detail-note-icon">⚠️</div><div>${step.note}</div></div>` : ''}
+      ${step.tools && step.tools.length ? `
+        <div class="detail-sub-label">Tools &amp; Systems</div>
+        <div class="tools-row">${step.tools.map(t=>`<span class="tool-tag">${t}</span>`).join('')}</div>` : ''}
+      ${isDec && step.outcomes ? `
+        <div class="detail-sub-label">Outcomes</div>
+        <div class="outcomes-row">
+          <div class="outcome-item yes">
+            <div class="outcome-icon">✅</div>
+            <div class="outcome-text"><strong>Yes</strong> ${step.outcomes.yes}</div>
+          </div>
+          <div class="outcome-item no">
+            <div class="outcome-icon">❌</div>
+            <div class="outcome-text"><strong>No</strong> ${step.outcomes.no}</div>
+          </div>
+        </div>` : ''}`;
+
+    return `
+      <div class="step-block">
+        <div class="step-marker ${isDec ? 'diamond' : ''}" style="background:${isDec ? '#f59e0b' : color}">
+          <span>${step.id}</span>
+        </div>
+        <div class="step-row ${isDec ? 'is-decision' : ''}" id="sr-${step.id}" onclick="toggleStep(${step.id})">
+          <div class="step-header">
+            <div class="step-text">
+              <div class="step-label">${step.label}</div>
+              <div class="step-badges">
+                <span class="owner-badge" style="color:${color};background:${tint(color,0.1)}">${o.label}</span>
+                ${isDec ? '<span class="type-badge">Decision Point</span>' : ''}
+              </div>
+            </div>
+            <div class="step-chevron">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="step-detail" id="sd-${step.id}">
+            <div class="step-detail-inner">
+              <div class="step-detail-content">${detailHtml}</div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  wrapper.innerHTML = prefix + stepsHtml + suffix;
+}
+
+// ─── INTERACTIONS ─────────────────────────────────────────────────────────
+
+function toggleStep(id) {
+  const row    = document.getElementById('sr-' + id);
+  const isOpen = row.classList.contains('open');
+
+  if (isOpen) {
+    row.classList.remove('open');
+  } else {
+    // Optional: close others first for accordion style
+    // document.querySelectorAll('.step-row.open').forEach(el => el.classList.remove('open'));
+    row.classList.add('open');
+  }
+}
+
+function toggleAllSteps(forceOpen) {
+  const rows = document.querySelectorAll('.step-row');
+  rows.forEach(row => {
+    if (forceOpen) {
+      row.classList.add('open');
+    } else {
+      row.classList.remove('open');
+    }
+  });
+}
+
+function renderNotes() {
+  document.getElementById('notesGrid').innerHTML = notes.map(n => `
+    <div class="note-card ${n.type}">
+      <div class="note-header">
+        <div class="note-icon">${n.icon || (n.type === 'gap' ? '⚠️' : n.type === 'strength' ? '✅' : '💡')}</div>
+        <div class="note-type">${n.type === 'gap' ? 'Gap' : n.type === 'strength' ? 'Strength' : 'Opportunity'}</div>
+      </div>
+      <div class="note-title">${n.title}</div>
+      <div class="note-text">${n.text}</div>
+    </div>`).join('');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+renderSources();
+renderPartnerTypes();
+renderLegend();
+renderFlow();
+renderNotes();
+
+// Open the first step by default
+setTimeout(() => toggleStep(1), 300);
+
+</script>
+</body>
+</html>
